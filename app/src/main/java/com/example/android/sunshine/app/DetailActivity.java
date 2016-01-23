@@ -41,6 +41,7 @@ public class DetailActivity extends ActionBarActivity {
         }
         Intent intent = getIntent();
         detail = intent.getStringExtra(Intent.EXTRA_TEXT);
+
     }
 
 
@@ -60,6 +61,8 @@ public class DetailActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent inte = new Intent(this, SettingsActivity.class);
+            startActivity(inte);
             return true;
         }
 
