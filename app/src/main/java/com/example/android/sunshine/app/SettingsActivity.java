@@ -6,6 +6,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,12 +20,14 @@ import android.view.MenuItem;
  */
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
+final static String LOG_TAG = "Settings Sunshine ";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Add 'general' preferences, defined in the XML file
-        // TODO: Add preferences from XML
+        addPreferencesFromResource(R.xml.pref_general);
+
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
@@ -62,8 +65,8 @@ public class SettingsActivity extends PreferenceActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent inte = new Intent(this, SettingsActivity.class);
-            startActivity(inte);
+
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
@@ -80,10 +83,13 @@ public class SettingsActivity extends PreferenceActivity
             int prefIndex = listPreference.findIndexOfValue(stringValue);
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
+                Log.d(LOG_TAG, "Preference was " + prefIndex);
+                bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
             }
         } else {
             // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
         }
         return true;
     }
