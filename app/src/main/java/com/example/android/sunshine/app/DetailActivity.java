@@ -19,19 +19,22 @@ package com.example.android.sunshine.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
     private static String detail = "";
     private static final String LOG_TAG = "Detail Activity";
     private ShareActionProvider mShareActionProvider;
+    private String FORECAST_SHARE_HASHTAG = "  #SunshineApp";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +55,19 @@ public class DetailActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail, menu);
-        //I hate this function
-        mShareActionProvider = (ShareActionProvider) ((MenuItem)(menu.findItem(R.id.action_share_all))).getActionProvider();
-        return true;
+        MenuItem menuItem = menu.findItem(R.id.action_share_all);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        return super.onCreateOptionsMenu(menu);
     }
+
+    private Intent createShareForecastIntent(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, detail + FORECAST_SHARE_HASHTAG);
+        return shareIntent;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -71,17 +83,15 @@ public class DetailActivity extends ActionBarActivity {
             return true;
         }else if(id == R.id.action_share_all){
             //start implicit intent to share item using Intent.ACTION_SEND
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.putExtra("share", detail + " #SunshineApp");
-            /*
+
+            Intent sendData = createShareForecastIntent();
+
             if(sendData.resolveActivity(getPackageManager())!=null){
-                startActivity(sendData);
+                mShareActionProvider.setShareIntent(sendData);
             }else{
                 Log.d(LOG_TAG, "No intent able to handle share data action.");
             }
-            */
 
-            mShareActionProvider.setShareIntent(shareIntent);
 
         }
 
