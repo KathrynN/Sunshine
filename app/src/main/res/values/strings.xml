@@ -5,5 +5,39 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh" translatable="false">Refresh</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_location_label">Preferred Location</string>
+
+    <string name="pref_units_key">units</string>
+    <string name="pref_units_default">metric</string>
+    <string name="pref_units_title">Units</string>
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_location_default">Basildon</string>
+    <string name="pref_location_key" translatable="false">label</string>
+    <string name="action_map">View Location</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+
+    <string-array name="pref_units_values">
+        <item>metric</item>
+        <item>imperial</item>
+    </string-array>
+
+
+    <string-array name="pref_units_options">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+
 
 </resources>
