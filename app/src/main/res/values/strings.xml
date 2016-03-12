@@ -9,7 +9,8 @@
 
     <!-- Strings related to Settings -->
     <string name="pref_location_label">Preferred Location</string>
-
+    <string name="pref_units_imperial">Imperial</string>
+    <string name="pref_units_metric"> Metric </string>
     <string name="pref_units_key">units</string>
     <string name="pref_units_default">metric</string>
     <string name="pref_units_title">Units</string>
